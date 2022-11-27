@@ -4,6 +4,8 @@
     {
         internal int i = 9;
         public int j = 8;
-        string str = "stringFromClass1";
+        string str = "str1";
+        string str1 = "str2";
+        string strHello = "ssssss";
     }
 }

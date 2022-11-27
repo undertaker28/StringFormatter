@@ -9,9 +9,11 @@ namespace StringFormatter
 
             var obj = new Class1();
             string result;
-            result = StringFormatter.Shared.Format("{{str } {i}}", obj);
+
+            //  var result2 = StringFormatter.CreateGetter(obj, "str");
+            result = StringFormatter.Shared.Format("{hello world}", obj);
             result = StringFormatter.Shared.Format("{str}{world}", obj);
-            result = StringFormatter.Shared.Format("{(str}i}", obj);
+            result = StringFormatter.Shared.Format("{{str}{i}}", obj);
             result = StringFormatter.Shared.Format("{hello world}}", obj);
             result = StringFormatter.Shared.Format("{hello world}{}", obj);
 
