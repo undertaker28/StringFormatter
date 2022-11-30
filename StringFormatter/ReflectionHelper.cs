@@ -1,9 +1,11 @@
-﻿using System.Linq.Expressions;
+﻿using System.Collections.Concurrent;
+using System.Linq.Expressions;
 
 namespace StringFormatter
 {
     internal class ReflectionHelper
     {
+
         private class PropertyGetterKey
         {
             internal Type Type { get; set; }
@@ -21,17 +23,11 @@ namespace StringFormatter
                 return HashCode.Combine(Type, PropertyName);
             }
         }
-
+        private readonly ConcurrentDictionary<PropertyGetterKey, Func<object, object>> propertyGetters;
         internal ReflectionHelper()
         {
-            propertyGetters = new Dictionary<PropertyGetterKey, Func<object, object>>();
+            propertyGetters = new ConcurrentDictionary<PropertyGetterKey, Func<object, object>>();
         }
-
-        //internal ReflectionHelper createInstance
-        private static ReflectionHelper Instance;// = new ReflectionHelper();
-
-        private readonly Dictionary<PropertyGetterKey, Func<object, object>> propertyGetters;// = new Dictionary<PropertyGetterKey, Func<object, object>>();
-
         public object GetPropertyValue(object entity, string propertyName)
         {
             Func<object, object> getter;
@@ -44,7 +40,7 @@ namespace StringFormatter
             {
                 getter = CreateGetter(entity, propertyName);
                 if (getter != null)
-                    propertyGetters.Add(key, getter);
+                    propertyGetters.TryAdd(key, getter);
                 else
                     return null;
             }
