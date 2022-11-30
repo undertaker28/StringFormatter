@@ -8,8 +8,8 @@ namespace StringFormatter
 
         private class PropertyGetterKey
         {
-            internal Type Type { get; set; }
-            internal string PropertyName { get; set; }
+            internal Type? Type { get; set; }
+            internal string? PropertyName { get; set; }
 
             public override bool Equals(object? obj)
             {
@@ -28,7 +28,7 @@ namespace StringFormatter
         {
             propertyGetters = new ConcurrentDictionary<PropertyGetterKey, Func<object, object>>();
         }
-        public object GetPropertyValue(object entity, string propertyName)
+        public object? GetPropertyValue(object entity, string propertyName)
         {
             Func<object, object> getter;
 
@@ -48,7 +48,7 @@ namespace StringFormatter
             return getter(entity);
         }
 
-        private static Func<object, object> CreateGetter(object entity, string propertyName)
+        private static Func<object, object>? CreateGetter(object entity, string propertyName)
         {
             var param = Expression.Parameter(typeof(object), "instance");
             Expression<Func<object, object>> getterExpression;

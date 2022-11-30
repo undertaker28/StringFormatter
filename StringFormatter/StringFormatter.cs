@@ -2,18 +2,9 @@
 {
     public class StringFormatter : IStringFormatter
     {
-
-        private struct StringIds
-        {
-            int startId;
-            int endId;
-        }
         public static readonly StringFormatter Shared = new StringFormatter();
         private ReflectionHelper _reflectionHelper;
-        private StringFormatter()
-        {
-            _reflectionHelper = new ReflectionHelper();
-        }
+        private StringFormatter() => _reflectionHelper = new ReflectionHelper();
         public string Format(string template, object target)
         {
             if (!isEqualBrackets(template))
