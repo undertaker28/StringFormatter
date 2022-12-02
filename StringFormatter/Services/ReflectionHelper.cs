@@ -28,6 +28,7 @@ namespace StringFormatter
         {
             propertyGetters = new ConcurrentDictionary<PropertyGetterKey, Func<object, object>>();
         }
+
         public object? GetPropertyValue(object entity, string propertyName)
         {
             Func<object, object> getter;
