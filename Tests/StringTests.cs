@@ -1,5 +1,7 @@
 ﻿using TestClass;
 
+[assembly: Parallelize(Workers = 0, Scope = ExecutionScope.MethodLevel)]
+
 namespace Tests
 {
     [TestClass]
@@ -54,9 +56,9 @@ namespace Tests
         public void FormatTest6()
         {
             var user = new User("Павел", "Старовойтов");
-            var result  = StringFormatter.StringFormatter.Shared.Format("{{date}} = '{date}'", user);
+            var result = StringFormatter.StringFormatter.Shared.Format("{{date}} = '{date}'", user);
 
-            Assert.AreEqual("{date} = '14.08.2022 0:00:00'", result);
+            Assert.AreEqual("{date} = '13.12.2022 0:00:00'", result);
         }
 
         [TestMethod]
