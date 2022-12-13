@@ -28,11 +28,6 @@ namespace StringFormatter
                 result = "{" + result;
             }
 
-            if (template.LastIndexOf("{{") == template.Length - 2)
-            {
-                result += "{";
-            }
-
             result = result.Replace("}}", "}");
 
             return result;
@@ -114,7 +109,6 @@ namespace StringFormatter
             startId = str.IndexOf("{", startedFrom) + 1;
             endId = 0;
 
-            int secondStart;
             while (!isFoundBoundaries && startId != 0)
             {
                 endId = str.IndexOf("}", startId);
@@ -122,17 +116,7 @@ namespace StringFormatter
                 {
                     endId = str.IndexOf("}", endId + 1);
                 }
-
-                secondStart = str.IndexOf("{", startId) + 1;
-
-                if (secondStart < endId && secondStart != 0)
-                {
-                    startId = secondStart;
-                }
-                else
-                {
-                    isFoundBoundaries = true;
-                }
+                isFoundBoundaries = true;
             }
         }
     }
